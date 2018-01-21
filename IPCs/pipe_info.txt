@@ -1,0 +1,12 @@
+1. Pipes are half-duplex
+2. Pipes are not synonymous with shared memory
+   Used for solving producer-consumer algorithms
+
+3. Basic hand-shake between writer and reader
+   a. Writer blocks if pipe buffer is full until the reader consumes data
+   b. Reader blocks if pipe buffer is empty until writer produces data
+
+   c. Reader exits (read() returns 0) if there are no more writers on the pipe
+   d. Writer is killed with SIGPIPE if there are no readers on the pipe
+
+

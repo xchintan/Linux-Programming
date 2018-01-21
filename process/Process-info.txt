@@ -1,0 +1,28 @@
+On Exit:
+
+When a process invokes exit_group():
+   1. The process is marked as Terminated (X) state and removed from runqueue
+   2. All resources held by this process is freed 
+      (memory segments, file descriptors, mutexes and so on)
+   3. The process is now marked as Zombie (Z) or defunct.
+   4. All its children PPid are changed to 1.
+   4. Now the task structure of this process is added into its 
+      parent's exited_children linked list.
+   5. A SIGCHLD signal is delivered to the parent.
+
+When the parent process waits for the child by using wait() system call:
+   1. The parent process is blocked as long as exited_children linked list is
+      empty.
+   2. When a zombie child is added into the exited_children,
+      a. The parent is unblocked
+      b. Get the exit_code of the child process and pid of the child process
+      c. Frees the child process task structure
+
+R - Runnable state
+S - Interruptible Sleep state (waiting for I/O)
+D - Uninterruptible sleep state
+Z - Defunct (Zombie)
+X - Terminated
+T - Suspended/Stopped state
+t - Traced state 
+

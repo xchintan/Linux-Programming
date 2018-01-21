@@ -1,0 +1,12 @@
+1. Reliable signals
+   a. Level-triggered
+   b. Sigpending -> bitmask
+   c. Generally predefined purposes
+   d. 32 reliable signals (1 to 32)
+  
+2. Realtime signals
+   a. Sigqueue is a FIFO
+   b. Edge-triggered
+   c. Completely user-defined purpose
+   d. Approximately 32 real-time signals (SIGRTMIN to SIGRTMAX)
+

@@ -1,0 +1,57 @@
+--------------------------------------------------
+#Shared Libray
+--------------------------------------------------
+
+Create
+-------
+	Create square.c, cube.c with the functions
+	gcc -fPIC -shared square.c cube.c -o libmath.so.1.0.1
+
+Compile 1:
+----------
+	vim testmath.c # create the test program here
+	gcc testmath.c -o testmath -L/path/to/lib/ libmath.so.1.0.1
+
+Execute:
+	./testmath
+
+--------------------------------------------------
+#Static Library
+--------------------------------------------------
+gcc -c square.c cube.c 
+    # generates square.o and cube.o files
+
+ar cru libmymath.a square.o cube.o
+    # creates libmymath.a with contents as square.o and cube.o
+
+gcc testmath.c -L/path/to/library/folder -lmymath
+    # statically link functions from libmymath.a into testmath.c
+
+
+
+
+--------------------------------------------------
+# Setup ld cache
+--------------------------------------------------
+sudo mkdir /opt/mylibs
+sudo cp libmymath.so /opt/mylibs
+sudo vim /etc/ld.so.conf
+sudo /sbin/ldconfig
+
+
+--------------------------------------------------
+#Versioning:
+--------------------------------------------------
+libname.so.major.minor.update
+
+libmath.so.1.0.1:		libmath.so.1
+libmath.so.1.0.2 		libmath.so.1
+
+libmath.so.1.1.0 		libmath.so.1
+
+libmath.so.2.0.0 		libmath.so.2
+
+Increment update/release numberon bug-fixes and other optimizations
+Increment minor number on new feature add-ons.
+Increment major number on modifications to function prototypes/global datastructure
+

@@ -1,0 +1,10 @@
+1. Fork a child process
+2. Exit parent
+3. In child:
+   1. Redirect fd 0, 1, 2 to /dev/null
+   2. Detach from the session/process group (setsid)
+   3. Change to / directory
+   4. Setting up logs for communication to user (syslog)
+   5. Keep running
+   6. Setup signal handlers for exiting the daemon
+
