@@ -1,0 +1,65 @@
+pthread_create()
+		Create the thread
+		Thread terminate in one of the following conditions:
+			- End of thread of routine
+			- pthread_exit()
+			- pthread_cancel()
+			- exit()
+
+
+A  thread  may  either  be  joinable  or  detached.By default, a new
+thread is created in a  joinable.
+
+Making a thread detached is useful for some types of daemon threads whose 
+exit status the application does not need to care about.
+
+
+pthread_setschedparam() 
+	sets the scheduling policy and parameters of the thread thread.
+	Policies and their semantics are similar to sched_setscheduler()
+
+	
+pthread_join(thread_id,void **retval)
+		Wait for a thread to terminate. If thread has already terminated, join will return 
+		immidiately. The return value is copied into  **retval.
+
+		If the target thread is cancelled, then PTHREAD_CANCELED is placed in *retval.
+		If there're multiple threads, there is no clean way to wait for them all.
+
+		tryjoin()
+		timedjoin()
+
+pthread_exit()	
+		Terminates the calling thread.
+
+pthread_detach()
+,
+
+pthread_cancel(thread_id):
+		Terminates the thread indicated by thread_id
+		Thread's cancellability can be set by
+			pthread_setcancelstate() 
+
+
+pthread_self()
+		Returns thread id of the self.
+
+
+pthread_equal(pthread_t t1, pthread_t t2)
+		Compares if two threads are equal.
+
+
+static __thread char buf[MAXLEN]; /* Thread-Specific Data (TSD) */
+
+pthread_attr_init()
+pthread_attr_setstacksize(), pthread_attr_setstack()
+
+Condition Varaibles
+--------------------------
+	pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+	pthread_cond_wait(&cond, &mtx);
+	pthread_cond_signal(&cond);
+	pthread_cond_broadcast(&cond);
+
+
+

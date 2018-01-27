@@ -1,0 +1,105 @@
+File System Calls:
+----------------------------------------
+	open()
+	read() 
+	write() 
+	close()
+	lseek()
+	fsync(), fdatasync(),
+	ftruncate() / truncate()
+	dup(), dup2(), dup3()
+	fcntl(), flock(), ioctl()
+
+
+Others:
+	pread(), readv(), aio_read()
+	pwrite(), writev(), aio_write()
+	posix_fallocate(), posix_fadvise(), 
+
+----------------------------------------
+Directories
+----------------------------------------
+	mkdir()
+	rmdir()
+	get_current_dir_name()
+	opendir() / readdir() / closedir()
+
+----------------------------------------
+Links:
+----------------------------------------
+	symlink(const char *existing_file, const char *new_link);
+	ssize_t readlink(const char *path, char *buf, ssize_t len);
+
+	link(const char *existing_file, const char *new_link);
+
+
+----------------------------------------
+Hard links
+----------------------------------------
+1. Cannot span across filesystems
+2. Cannot create hardlinks for all file types
+   [Can be created only for regular files]
+
+3. Difficult to identify files with same inode number (links to a file)
+
+
+
+
+
+
+
+
+
+
+
+
+
+[Directories]
+mkdir(), rmdir(), chdir(), fchdir(),
+get_current_dir_name(),
+opendir(), readdir(), closedir(),
+getdents()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[Link and Symlinks]
+link(), unlink(), symlink(), readlink(), 
+rename()
+
+[Special files]
+mknod(), mkfifo(), major(), minor(), makedev()
+
+[File stat]
+stat(), chmod(), chown(), chroot(), access(), euidaccess(),
+utime()
+
+[Advanced]
+mmap(), execve(), 
+sendfile(), splice(), tee(), vmsplice()
+
+
+
+
+

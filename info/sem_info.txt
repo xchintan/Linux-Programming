@@ -1,0 +1,63 @@
+Unnamed Semaphores
+-----------------------
+	-	Used across threads of same process 
+	- 	Between related processes (parent/child/siblings)
+
+Step 0:
+-----
+	If semaphore going to be shared across processes, it should be declared using mmap
+		sem_t rsem = 
+			 mmap(NULL,sizeof(sem_t),PROT_READ|PROT_WRITE, 
+			 	  MAP_ANONYMOUS | MAP_SHARED,
+			 	  -1, 0);
+	
+	If semaphore is going to be used across threads (hence no sharing needed across),
+	processes,declare semaphore globally OR on heap.
+
+		sem_t rsem;
+		sem_t wrsem;
+
+Step 1:
+-------
+	sem_init(&rsem, 
+			SHARED_FLAG 0/1, 
+			initial_value // If 0 - it means locked) 
+
+
+Step 2: Acquire/Release
+-------------
+	sem_wait()
+		sem_trywait()
+		sem_timedwait()
+
+	sem_post() //Release
+
+Step 3: Cleanup
+------------
+	Release sem Memory if allocated using malloc
+	Un-map, if allocated using mmap
+
+
+
+
+Named Semaphore:
+--------------------
+	Use it for unrelated processes.
+
+	sem_t rsem = 	sem_open("/mysem", O_RDWR | O_CREAT ,0666,1 //Init value);
+	
+	Two process will try to open/create semaphore
+		a) So first try with O_EXCEL 
+		b) If #a fails, try without O_EXCL
+
+	sem_init()
+	sem_wait()
+	sem_post()
+
+Cleanup
+--------------
+	sem_close()
+
+	Delete:
+		sem_unlink()
+

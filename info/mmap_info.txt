@@ -1,0 +1,57 @@
+mmap
+	- Memory mapped by mmap() is preserved across fork(), with the same attributes.
+	- A file is mapped in multiples of the page size.
+	- ******** "Closing the file descriptor does not unmap the region"
+	- Region is also  automatically  unmapped when the process is terminated.  
+
+
+mmap()
+	void *mmap(void *addr, size_t length, 
+			   int protection , int flags, 
+			   int fd, off_t offset);
+
+	Example:
+			mmap(NULL, 1024, PORT_READ | PORT_WRITE, 
+				MAP_SHARED / MAP_PRIVATE etc ...
+				file_fd  OR -1 For anonymous mapping,
+				0L);
+
+	- The flags argument determines whether updates to the mapping are 
+	  visible to other processes  mapping.  
+
+	- *** And whether updates are carried through to the underlying file.  
+
+	- This behavior is determined by followig two EXCLUSIVE FLAG:
+
+       MAP_SHARED 
+			Share this mapping.
+			Updates to the mapping are visible to other processes 
+			*** Updates are carried through to the underlying file.  
+			** Updates MAY NOT BE VISIBLE  UNTIL msync() /munmap()
+
+       MAP_PRIVATE
+			- Create a private copy-on-write mapping.  
+			- Updates to the mapping are not visible to  other  processes.
+			- Updates ARE NOT carried through to the underlying file.
+
+
+	MAP_ANONYMOUS:
+		The mapping is not backed by any file; its contents are initialized to zero.
+		The fd  and  offset  arguments  are  ignored; 
+		However, some implementations require fd to be -1.
+
+
+munmap():
+	The munmap() system call deletes the mappings for the specified address range, and
+	causes further references to result in SIGSEGV.
+
+
+
+Usage:
+		int fd = open(file); // Optional for anonymous mapping
+		char *buf = mmap()
+		close(fd);
+		read()/write();
+		munmap();
+
+

@@ -1,0 +1,16 @@
+- sem close() from forked processes and in parent
+- munmap() 	in all forked processes
+- close() in forker processes
+- singal hanlders in children
+	If you do fork (without further exec*) after a signal handler has been registered, the
+	same signal handler will be used in parent and child processes.
+
+- signals and thread
+	The signal disposition is a per-process attribute: in a multithreaded application, the
+	disposition of a particular signal is the same for all threads.
+
+
+- What happens if main thread exits?
+	- Boom, all threads go down.
+	- So wait for threads to finish (pthread_join)
+	

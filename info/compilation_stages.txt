@@ -1,0 +1,22 @@
+Compilation steps
+-------------------
+
+#Shorthand: ESco:	-E	-S -c -o
+
+gcc -E hello.c > hello.i 
+   # Stops at pre-processing
+
+gcc -S hello.i
+   # Stops after compilation -> generates assembly code hello.s
+
+gcc -c hello.s
+   # Stops after assembly -> generates object file hello.o
+
+gcc hello.o -o hello
+   # Link the object file to executable binary
+
+
+#Manual linking
+ld -dynamic-linker /lib/ld-linux.so.2 /usr/lib/crt1.o /usr/lib/crti.o /usr/lib/gcc/i486-slackware-linux/4.7.1/crtbegin.o
+-L/usr/lib/gcc/i486-slackware-linux/4.7.1 hello.o -lgcc -lgcc_eh -lc /usr/lib/gcc/i486-slackware-linux/4.7.1/crtend.o /usr/lib/crtn.o
+

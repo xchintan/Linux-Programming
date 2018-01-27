@@ -1,0 +1,10 @@
+mq_open()
+mq_close()
+mq_unlink()
+
+mq_send() / mq_recieve()
+
+mq_setattr() / mq_getattr()
+
+mq_notify()
+

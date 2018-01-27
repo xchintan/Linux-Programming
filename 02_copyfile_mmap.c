@@ -31,11 +31,10 @@ int main(int argc, char *argv[])
         exit(-1);
     }
 	
-	//If you want to use memcpy - us O_RDWR
-	// For write() syscall you can use O_WRITE also
+	//For memcpy() O_RDWR is needed, O_WRONLY results in crash
 	dst_fd = open(argv[2], O_RDWR | O_CREAT, 0644);
 	ftruncate(dst_fd, info.st_size);
-	wbuf = (char*) mmap(NULL,info.st_size,PROT_WRITE, MAP_PRIVATE,
+	wbuf = (char*) mmap(NULL,info.st_size,PROT_WRITE, MAP_SHARED,
 						dst_fd,0L);
 
 	memcpy(wbuf,rbuf,info.st_size);

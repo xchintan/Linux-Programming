@@ -1,0 +1,39 @@
+Shared memory 
+--------------
+
+
+step1: shm_open()
+---------------
+Creates  and  opens a new, or opens an existing, POSIX shared memory object.  A POSIX
+shared memory object is in effect a handle which can be used by unrelated processes 
+to mmap(2) the same region of shared memory region
+
+	 int shm_open(const char *name, int oflag, mode_t mode);
+			Name: /somename
+			oflags:
+				same open() flags
+					O_RDONLY
+					O_RDWR
+					O_CREAT
+					O_EXCL
+					O_TRUNC
+			mode:
+				0666 ...
+	  		
+step2: 
+--------------
+		ftruncate() //Optional
+		mmap()
+		"After a call to mmap(2) the file descriptor may be closed using shm_unlink(),
+		without affecting the memory mapping."
+
+		The operation of shm_unlink() is analogous to unlink(): it removes a shared
+		memory object name, and, once  all processes  have  unmapped  the  object, 
+		de-allocates and destroys the contents of the associated memory region.
+
+	
+shm_unlink()
+The  shm_unlink()  function  performs  the  converse operation, removing an
+object previously created by shm_open().
+
+

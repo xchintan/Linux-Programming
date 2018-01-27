@@ -1,0 +1,95 @@
+#ls CLI:
+	ls -li #inode
+	ls -ld #list directory and number of sub-directories in a given directory 
+		   #include (./ and ../)
+	
+#ps Reading process states
+
+R	Running
+S	Sleeping (interruptible)
+D 	Un-interruptible Sleep
+X	E(x)iting - transient State
+Z	Zombie
+T	Job control - Stopped
++	Foreground
+l	threads
+S	
+s
+
+#ps cli:
+	ps -ax
+	   -ef
+	   -eF
+	   -ely
+
+	ps axo pid,ppid,comm
+	
+	# stat,euid,ruid,
+	  tty,tpgid,sess,
+	  pgrp,ppid,pid,pcpu,
+      comm
+
+#Use more of the following
+	starce
+	time
+	watch
+	
+	cat /proc/filesystems
+	cat /proc/mounts
+	cat /proc/devices
+	
+
+#To read .gz file on the fly
+	zmore
+	zless
+	zcat
+	zgrep
+	
+#man pages:
+Located at:
+	cd /usr/share/man/man1-2-3-5-7
+	apropos .  #List all the man pages
+	apropos . | grep "(5)" #greps all the man pages of section 5
+
+	man -k search
+	man 7 boot
+	man 5 init
+	man 5 proc
+	man 7 epoll
+	man 7 futex
+	man 7 pthread
+	man 7 regex
+	man 5 core
+#procfs
+	man 5 proc
+	maps:
+		Memory layout of the process. Shows various segement such as, text,data,BSS,Heap,
+		Stack
+	
+	/fd/:
+		ls -l on all the softlinks
+
+	stack:
+		kernel stack
+
+	task:
+		threads
+	cmdline:
+		command line
+	exe:
+		Binary file
+
+	status:
+		A lot of information
+		
+	envrion:
+		Env variables		
+
+
+https://unix.stackexchange.com/questions/86012/what-is-the-purpose-of-the-hash-command			
+
+
+System Calls:
+	open("a.txt", O_RDONLY) -> syscall(__NR_open, "a.txt", O_RDONLY);
+	read(fd, buf, 512)  -> syscall(__NR_read, fd, buf, 512);
+

@@ -1,0 +1,44 @@
+								
+								Semaphore:	Use it for execution synchronization*
+								Mutex:		Use it to  protect the critical data*
+
+
+Mutex:
+A mutex is a MUTual EXclusion device, and is useful for protecting shared data structures
+from concurrent modi‐fications, and implementing critical sections and monitors.
+
+Mutex has two possible states:
+	Locked (and owned by one thread)
+	Unlocked
+	
+A mutex can never be owned by two different threads simultaneously. A thread attempting to
+fications, and implementing critical sections and monitors.lock a mutex that is already 
+locked by another thread is suspended until the owning thread unlocks the mutex first.
+
+Recursive locking?
+	- Again locking by thread, who has alread locked it.
+
+Mutex Attributes:
+	Fast:
+		If 'recursive' locked attempted, results in dead-lock
+		Thread is suspended forever.
+
+	Recursive:
+		Recursive attempt to lock scucceds.
+		Lock count is increased.
+		Num of lock() should match equal number of unlock()
+
+
+APIs:
+	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+	
+	pthread_mutex_lock()
+				 _trylock()
+
+	pthread_mutex_unlock()
+	Error-checking:
+		If this attirubte is set, recursive lock attemp returns
+		error message EDEADLK
+
+
+	

@@ -1,0 +1,11 @@
+Steps
+------
+	int ret = mkfifo("/myfifo",0666);
+
+	int fd =  open("/myfifo",O_WRONLY);
+	write(fd,buf,len);
+	
+
+		IN A PARALLEL Universere
+	int fd =  open("/myfifo",O_RDONLY);
+	read(fd,buf,len);
